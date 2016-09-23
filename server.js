@@ -3,21 +3,29 @@ var morgan = require('morgan');
 var path = require('path');
 
 var app = express();
-var articleOne={
+var articles={
+    article-one:{
     title:"Article-One | Amulya Pokala",
     date:"Sept 15,2016",
     heading:"Article One",
     content:` <p>
                              This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.
                     </p>
-                    <p>
-                            This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.
-                    </p>
-                    <p>
-                        This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.
-                    </p>`
+                    `},
     
-}
+ article-two:{title:"Article-Two | Amulya Pokala",
+    date:"Sept 15,2016",
+    heading:"Article Two",
+    content:` <p>
+                             This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.
+                    </p>`},
+ article-three:{title:"Article-Three | Amulya Pokala",
+    date:"Sept 15,2016",
+    heading:"Article Three",
+    content:` <p>
+                             This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.This is the content.
+                    </p>`}
+};
 function createTemplate(data){
     var heading=data.heading;
     var date=data.date;
@@ -64,16 +72,12 @@ app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
 
-app.get('/article-one', function (req, res) {
-  res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req, res) {
+    var articleName=req.params.articleName;
+  res.send(createTemplate(articles[articleName]));
 
 });
-app.get('/article-two', function (req, res) {
-   res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-app.get('/article-three', function (req, res) {
-res.sendFile(path.join(__dirname, 'ui', 'article-three.html'));
-});
+
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
